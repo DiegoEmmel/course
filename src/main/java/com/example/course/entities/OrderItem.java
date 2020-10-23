@@ -21,7 +21,6 @@ public class OrderItem implements Serializable {
 	private Double price;
 
 	public OrderItem() {
-		super();
 	}
 
 	public OrderItem(Order order, Product product, Integer quantity, Double price) {
@@ -63,6 +62,10 @@ public class OrderItem implements Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Double getSubtotal() {
+		return price * quantity;
 	}
 
 	@Override

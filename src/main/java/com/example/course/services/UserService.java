@@ -27,8 +27,25 @@ public class UserService {
 	public User insert(User obj) {
 		return repository.save(obj);
 	}
-	
+
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+
+	public User update(Long id, User obj) {
+		/*
+		 * o Método getOne() instancia um objeto mas não acessa o banco de dados ainda,
+		 * ele vai retornar um objeto monitorado pelo JPA para eu poder trabalhar com
+		 * esse objeto e em seguida eu faço alguma operação em banco de dados
+		 */
+		User entity = repository.getOne(id);
+		updateData(entity, obj);
+		return repository.save(entity);
+	}
+	
+	private void updateData(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
 	}
 }
